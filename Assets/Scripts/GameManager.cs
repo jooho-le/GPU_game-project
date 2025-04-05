@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
        
         if (popupPanel != null)
         {
-            atkttip.SetActive(false);
+            //atkttip.SetActive(false);
             popupPanel.SetActive(false); // 처음엔 팝업 비활성화
             atkText = popupPanel.transform.Find("공격력증가/lvtext").GetComponent<TextMeshProUGUI>();
             spdText = popupPanel.transform.Find("이동속도증가/slvtext").GetComponent<TextMeshProUGUI>();
@@ -70,7 +70,11 @@ public class GameManager : MonoBehaviour
         int regencount = 0;
         while (currentTime > 0)
         {
-            timerText.text = "Next Time: " + currentTime.ToString("F1");
+            if (timerText != null)
+                timerText.text = "Next Time: " + currentTime.ToString("F1");
+            else
+                Debug.LogError("timerText is NULL!");
+
             yield return new WaitForSeconds(1f);
             currentTime--;
             regencount++;
@@ -329,5 +333,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+
 
 }
