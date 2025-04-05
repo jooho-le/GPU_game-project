@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class GameManager : MonoBehaviour
     public Button[] optionButtons;  // 선택 가능한 4개의 버튼
     public TextMeshProUGUI statusText;  // 플레이어 상태 표시 UI
     
-
     private Player player;  // Player 스크립트 참조
     private Weapon weapon;  // ✅ Weapon 스크립트 참조
 
@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI spdText;
     private TextMeshProUGUI hpText;
     private TextMeshProUGUI wcntText;
+
+    
 
     void Start()
     {
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
        
         if (popupPanel != null)
         {
+            atkttip.SetActive(false);
             popupPanel.SetActive(false); // 처음엔 팝업 비활성화
             atkText = popupPanel.transform.Find("공격력증가/lvtext").GetComponent<TextMeshProUGUI>();
             spdText = popupPanel.transform.Find("이동속도증가/slvtext").GetComponent<TextMeshProUGUI>();
