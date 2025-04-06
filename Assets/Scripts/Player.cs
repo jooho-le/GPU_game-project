@@ -5,14 +5,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;  // 🔴 UI 패널 사용을 위해 추가
 using TMPro;
 using System;
+using UnityEditor.Animations;
 
 public class Player : MonoBehaviour
 {
+    public GameOver gameover;
+
     public Vector2 inputVec;
     [SerializeField] public float speed;
     [SerializeField] public float maxhp = 50f;
     [SerializeField] public float hp = 50f;
-
     [SerializeField] public float regenhp = 0f;
 
     public int atklv = 0;
@@ -20,8 +22,9 @@ public class Player : MonoBehaviour
     public int spdlv = 0;
     public int wcntlv = 0;
 
-    private bool isGameOver = false;
     public int coinCount = 0; // 💰 코인 개수
+    private int getCoinCount = 0;
+
 
     Rigidbody2D rigid;
     SpriteRenderer spriter;
@@ -78,7 +81,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isGameOver)
+        if (!gameover.isGameOver)
         {
             Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
             rigid.MovePosition(rigid.position + nextVec);
@@ -109,7 +112,6 @@ public class Player : MonoBehaviour
         if (InvurableTime > 0f)
         {
             InvurableTime -= Time.deltaTime;
-            Debug.Log("무적시간");
         }
     }
 
@@ -166,6 +168,7 @@ public class Player : MonoBehaviour
     // ✅ 코인을 증가시키고 UI를 업데이트하는 함수
     public void AddCoin()
     {
+        gameover.GameLog(1);
         coinCount++;
         UpdateCoinUI();
         Debug.Log("Coin Collected! Total: " + coinCount);
@@ -184,9 +187,10 @@ public class Player : MonoBehaviour
     {
         hp -= damage;
         Debug.Log("Player HP: " + hp);
+        
         if (hp <= 0)
         {
-            GameOver();
+            gameover.Gameend();
         }
         else
         {
@@ -217,29 +221,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    void GameOver()
-    {
-        isGameOver = true;
-        Debug.Log("GAME OVER");
-    }
-
-    void OnGUI()
-    {
-        if (isGameOver)
-        {
-            GUIStyle style = new GUIStyle();
-            style.fontSize = 50;
-            style.normal.textColor = Color.red;
-            style.alignment = TextAnchor.MiddleCenter;  // 🎯 텍스트 중앙 정렬
-
-            float width = 200;
-            float height = 50;
-            float x = (Screen.width - width) / 2;
-            float y = (Screen.height - height) / 2;
-            Time.timeScale = 0f;
-
-            GUI.Label(new Rect(x, y, width, height), "GAME OVER", style);
-        }
-    }
-
+    
+    
 }
