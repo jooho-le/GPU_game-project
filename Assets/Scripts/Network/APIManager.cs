@@ -59,6 +59,7 @@ public class APIManager : MonoBehaviour
 
     private IEnumerator SignupRoutine(string id, string pw, System.Action<bool> callback)
     {
+        // id 를 username, email 둘 다에 사용
         var data = new SignupData(id, id, pw);
         string json = JsonUtility.ToJson(data);
 

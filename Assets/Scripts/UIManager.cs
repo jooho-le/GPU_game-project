@@ -6,29 +6,30 @@ public class UIManager : MonoBehaviour
 {
     [Header("팝업 오브젝트")]
     [SerializeField] GameObject loginPopup;      
-    [SerializeField] GameObject signupPopup;    
+    [SerializeField] GameObject signupPopup;     
 
     [Header("메인 메뉴 버튼")]
-    [SerializeField] Button loginButton;         
-    [SerializeField] Button signupButton;       
-    [SerializeField] Button startGameButton;    
+    [SerializeField] Button loginButton;        
+    [SerializeField] Button signupButton;        
+    [SerializeField] Button startGameButton;     
 
     [Header("로그인 팝업 필드")]
-    [SerializeField] TMP_InputField loginIDInput;        
-    [SerializeField] TMP_InputField loginPWInput;         
+    [SerializeField] TMP_InputField loginIDInput;         
+    [SerializeField] TMP_InputField loginPWInput;        
     [SerializeField] Button           loginSubmitButton;  
     [SerializeField] Button           closeLoginPopButton;
 
     [Header("회원가입 팝업 필드")]
-    [SerializeField] TMP_InputField signupIDInput;            
+    [SerializeField] TMP_InputField signupIDInput;           
     [SerializeField] TMP_InputField signupPWInput;            
     [SerializeField] TMP_InputField signupConfirmPWInput;     
     [SerializeField] Button           signupSubmitButton;    
-    [SerializeField] Button           closeSignupPopupButton; 
+    [SerializeField] Button           closeSignupPopupButton;
 
     [Header("유저 정보 텍스트")]
     [SerializeField] TMP_Text userIDText;     
     [SerializeField] TMP_Text stageStatusText; 
+
     APIManager api;
 
     void Awake()
