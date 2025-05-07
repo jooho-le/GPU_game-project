@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c34916d9366baf4598045d59f6dcd57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
-  health: 100
-  enemyAttackPower: 10
+  speed: 0.7
+  health: 300
+  enemyAttackPower: 40
   coinPrefab: {fileID: 4772529311461345144, guid: 91db0334ba5b2d94bbb7577a4011d743, type: 3}
 --- !u!50 &838423781024312148
 Rigidbody2D:
