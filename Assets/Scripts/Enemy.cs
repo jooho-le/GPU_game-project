@@ -5,8 +5,11 @@ using TMPro;  // TextMeshPro 네임스페이스
 
 public class Enemy : MonoBehaviour
 {
+<<<<<<< HEAD
     private GameOver Log;
 
+=======
+>>>>>>> 7d472ceb3f491567df17c1e76827ed795a0c14cc
     public float speed;
     [SerializeField] public float health;
     [SerializeField] public float enemyAttackPower;
@@ -22,11 +25,11 @@ public class Enemy : MonoBehaviour
     private TextMeshPro attackPowerText;  
 
     // 💰 코인 관련 변수 추가
-    public GameObject coinPrefab;
+
+    public GameObject coinPrefab; 
 
     void Awake()
     {
-        Log = FindObjectOfType<GameOver>();
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
 

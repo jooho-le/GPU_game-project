@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI hpText;
     private TextMeshProUGUI wcntText;
 
-    
     void Start()
     {
         player = FindObjectOfType<Player>(); // 자동으로 Player 찾기
@@ -95,14 +94,6 @@ public class GameManager : MonoBehaviour
         UpdateShopsUI();
         Time.timeScale = 0f;  // 게임 일시정지
         popupPanel.SetActive(true);  // 팝업창 표시
-    }
-
-    void StartNextRound()
-    {
-        Time.timeScale = 1f;  // 게임 다시 시작
-        popupPanel.SetActive(false);  // 팝업창 숨김
-        currentTime = roundTime;  // 타이머 리셋
-        StartCoroutine(TimerCountdown());
     }
 
     int requirecoin = 0;
@@ -200,6 +191,14 @@ public class GameManager : MonoBehaviour
         UpdateShopsUI();
         UpdateStatusUI(); // 변경 즉시 UI 업데이트
 
+    }
+
+    void StartNextRound()
+    {
+        Time.timeScale = 1f;  // 게임 다시 시작
+        popupPanel.SetActive(false);  // 팝업창 숨김
+        currentTime = roundTime;  // 타이머 리셋
+        StartCoroutine(TimerCountdown());
     }
 
     void UpdateStatusUI()

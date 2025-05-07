@@ -22,3 +22,4 @@ hp 150 dmg 30 spd 0.5
 
 Enemy 5 엘리트 몹(빠르고 튼튼하고 강함)
 hp 300 dmg 40 spd 0.7
+
