@@ -5,11 +5,7 @@ using TMPro;  // TextMeshPro 네임스페이스
 
 public class Enemy : MonoBehaviour
 {
-<<<<<<< HEAD
     private GameOver Log;
-
-=======
->>>>>>> 7d472ceb3f491567df17c1e76827ed795a0c14cc
     public float speed;
     [SerializeField] public float health;
     [SerializeField] public float enemyAttackPower;

@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;  // 🔴 UI 패널 사용을 위해 추가
 using TMPro;
 using System;
-<<<<<<< HEAD
 using UnityEditor.Animations;
 
 
@@ -245,5 +244,4 @@ public class Player : MonoBehaviour
         }
     }
 
->>>>>>> 7d472ceb3f491567df17c1e76827ed795a0c14cc
 }
