@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
     // ✅ 코인을 증가시키고 UI를 업데이트하는 함수
     public void AddCoin()
     {
-        gameover.GameLog(1);
+        gameover.GameLog(5);
         coinCount++;
         UpdateCoinUI();
         Debug.Log("Coin Collected! Total: " + coinCount);

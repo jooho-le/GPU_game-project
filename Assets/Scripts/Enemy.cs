@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     [SerializeField] public float health;
     [SerializeField] public float enemyAttackPower;
+    [SerializeField] public int enemyindex;
 
     private Rigidbody2D target;      // Player의 Rigidbody2D를 타겟으로 설정
     private bool isLived = true;
@@ -101,13 +102,14 @@ public class Enemy : MonoBehaviour
     // 적이 죽을 때 처리
     private void Die()
     {
-        Log.GameLog(0);
+        Log.GameLog(enemyindex);
         isLived = false;
 
         // 💰 코인 생성 기능 추가
         if (coinPrefab != null)
         {
-            Instantiate(coinPrefab, transform.position, Quaternion.identity);
+            for (int i = 0; i < enemyindex + 1; i++)
+                Instantiate(coinPrefab, transform.position, Quaternion.identity);
         }
         else
         {

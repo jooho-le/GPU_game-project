@@ -103,6 +103,7 @@ MonoBehaviour:
   speed: 0.8
   health: 250
   enemyAttackPower: 50
+  enemyindex: 3
   coinPrefab: {fileID: 4772529311461345144, guid: 91db0334ba5b2d94bbb7577a4011d743, type: 3}
 --- !u!50 &3601514721111054090
 Rigidbody2D:

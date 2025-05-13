@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEditor.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public class GameOver : MonoBehaviour
     public GameObject GameOverUI;
     public Button[] optionButtons;
     private CanvasGroup canvasGroup;
+    public TextMeshProUGUI KillCountText;
     public TextMeshProUGUI StatusText;
     public bool isGameOver = false;
+    [SerializeField] public int Stage;
 
-    private int killcount = 0;
+    private int[] killcount = new int[5] {0,0,0,0,0};
     private int GetCoinCount = 0;
 
     private void Awake()
@@ -42,9 +45,26 @@ public class GameOver : MonoBehaviour
         switch (index)
         {
             case 0:
-                killcount++;
+                killcount[0]++;
                 break;
+
             case 1:
+                killcount[1]++;
+                break;
+
+            case 2:
+                killcount[2]++;
+                break;
+
+            case 3:
+                killcount[3]++;
+                break;
+
+            case 4:
+                killcount[4]++;
+                break;
+
+            case 5:
                 GetCoinCount++;
                 break;
         }
@@ -74,7 +94,30 @@ public class GameOver : MonoBehaviour
 
     public void statusLog()
     {
-        StatusText.text = $"KILL: {killcount}\nGet Coin: {GetCoinCount}\nATK Lv: {player.atklv}\nHP Lv: {player.hplv}\nSPD Lv: {player.atklv}\nWEAPON Lv: 0";
+        switch (Stage)
+        {
+            case 1:
+                KillCountText.text = $"<sprite=0>   : {killcount[0]} <sprite=1>   : {killcount[1]}";
+                break;
+
+            case 2:
+                KillCountText.text = $"<sprite=0>   : {killcount[0]} <sprite=1>   : {killcount[1]} <sprite=2>  : {killcount[2]}";
+                break;
+
+            case 3:
+                KillCountText.text = $"<sprite=0>   : {killcount[0]} <sprite=1>   : {killcount[1]} <sprite=2>  : {killcount[2]} <sprite=3>  : {killcount[3]}";
+                break;
+
+            case 4:
+                KillCountText.text = $"<sprite=1>   : {killcount[1]} <sprite=2>   : {killcount[2]} <sprite=3>  : {killcount[3]}";
+                break;
+
+            case 5:
+                KillCountText.text = $"<sprite=1>   : {killcount[1]} <sprite=2>   : {killcount[2]} <sprite=3>  : {killcount[3]} <sprite=4>  : {killcount[4]}"; 
+                break;
+
+        }
+        StatusText.text = $"KILL:\n\n\nGet Coin: {GetCoinCount}\nATK Lv: {player.atklv}\nHP Lv: {player.hplv}\nSPD Lv: {player.atklv}\nWEAPON Lv: 0";
     }
 
 

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     
     private Player player;  // Player 스크립트 참조
     private Weapon weapon;  // ✅ Weapon 스크립트 참조
+    private WeaponManager wmanage; // WeaponManager 스크립트
 
     private TextMeshProUGUI atkText;
     private TextMeshProUGUI spdText;
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         player = FindObjectOfType<Player>(); // 자동으로 Player 찾기
         weapon = FindObjectOfType<Weapon>(); // 자동으로 Weapon 찾기
-
+        wmanage = FindObjectOfType<WeaponManager>();
        
         if (popupPanel != null)
         {
@@ -121,7 +122,7 @@ public class GameManager : MonoBehaviour
                     player.coinCount -= requirecoin;
                     player.UpdateCoinUI();
                     weapon.attackPower = weapon.attackPower + 5;
-                    if (player.atklv == 5)
+                    if (player.atklv == 6)
                     {
                         weapon.attackPower -= 5;
                         weapon.attackPower *= 1.5f;
@@ -159,13 +160,13 @@ public class GameManager : MonoBehaviour
                     player.UpdateCoinUI();
                     player.maxhp += 10;
                     player.hp += 10;
-                    if (player.hplv < 5)
+                    if (player.hplv < 6)
                         player.regenhp += 0.1f;
 
                     else if (player.hplv < 10 && player.hplv > 5)
                         player.regenhp += 0.2f;
                      
-                    if (player.hplv == 5)
+                    if (player.hplv == 6)
                     {
                         player.maxhp -= 10;
                         player.hp -= 10;
@@ -191,10 +192,83 @@ public class GameManager : MonoBehaviour
                     Debug.Log($"체력 회복! 현재 체력: {player.hp}");
                 }
                 break;
-            /*case 3:
-                player.AddWeapon(); 
+            case 3:
+
+                switch (player.wcntlv)
+                {
+                    case 0:
+                        requirecoin = 50;
+                        break;
+
+                    case 1:
+                        requirecoin = 150;
+                        break;
+
+                    case 2:
+                        requirecoin = 400;
+                        break;
+
+                    case 3:
+                        requirecoin = 900;
+                        break;
+
+                    case 4:
+                        requirecoin = 2000;
+                        break;
+
+                }
+
+                switch (player.wcntlv)
+                {
+                    case 0:
+                        if (player.coinCount >= 50)
+                        {
+                            player.coinCount -= 50;
+                            wmanage.IncreaseWeapon();
+                            player.wcntlv++;
+                        }
+                        break;
+
+                    case 1:
+                        if (player.coinCount >= 150)
+                        {
+                            player.coinCount -= 150;
+                            wmanage.IncreaseWeapon();
+                            player.wcntlv++;
+                        }
+                        break;
+
+                    case 2:
+                        if (player.coinCount >= 400)
+                        {
+                            player.coinCount -= 400;
+                            wmanage.IncreaseWeapon();
+                            player.wcntlv++;
+                        }
+                        break;
+
+                    case 3:
+                        if (player.coinCount >= 900)
+                        {
+                            player.coinCount -= 900;
+                            wmanage.IncreaseWeapon();
+                            player.wcntlv++;
+                        }
+                        break;
+
+                    case 4:
+                        if (player.coinCount >= 2000)
+                        {
+                            player.coinCount -= 2000;
+                            wmanage.IncreaseWeapon();
+                            player.wcntlv++;
+                        }
+                        break;
+                        
+                }
                 Debug.Log("무기 개수 증가!");
-                break; */
+                player.UpdateCoinUI();
+                break; 
         }
 
         UpdateShopsUI();
@@ -212,15 +286,46 @@ public class GameManager : MonoBehaviour
 
     void UpdateShopUI(int level, int index)
     {
-        if (index != 1)
-            Requirecoin(level);
-
-        else if (index == 1)
+        switch (index)
         {
-            if (player.spdlv <= 5)
-                requirecoin = 5;
-            if (player.spdlv > 5)
-                requirecoin = 10;
+            case 0:
+            case 2:
+                Requirecoin(level);
+                break;
+            case 1:
+                if (player.spdlv <= 5)
+                    requirecoin = 5;
+                if (player.spdlv > 5)
+                    requirecoin = 10;
+                break;
+        }
+
+        if (index == 3)
+        {
+            switch(level)
+            {
+                case 0:
+                    requirecoin = 50;
+                    break;
+
+                case 1:
+                    requirecoin = 150;
+                    break;
+
+                case 2:
+                    requirecoin = 400;
+                    break;
+                
+                case 3:
+                    requirecoin = 900;
+                    break;
+
+                case 4:
+                    requirecoin = 2000;
+                    break;
+
+            }
+
         }
 
         switch (index)
@@ -229,10 +334,13 @@ public class GameManager : MonoBehaviour
                 if (atkText != null)
                 {
                     Debug.Log($"atkText 업데이트: {atkText.text}");
-                    if (player.atklv <= 10)
+                    if (player.atklv < 10)
                         atkText.text = $"{level}Lv→{level + 1}Lv\n{requirecoin} Gold";
                     else
+                    {
                         atkText.text = "MAX";
+                        requirecoin = 0;
+                    }
 
                     if (requirecoin > player.coinCount)
                         atkText.color = Color.red;
@@ -246,10 +354,13 @@ public class GameManager : MonoBehaviour
                 if (spdText != null)
                 {
                     Debug.Log($"spdText 업데이트: {spdText.text}");
-                    if (player.spdlv <= 10)
+                    if (player.spdlv < 10)
                         spdText.text = $"{level}Lv→{level + 1}Lv\n{requirecoin} Gold";
                     else
+                    { 
                         spdText.text = "MAX";
+                        requirecoin = 0;
+                    }
 
                     if (requirecoin > player.coinCount)
                         spdText.color = Color.red;
@@ -262,10 +373,13 @@ public class GameManager : MonoBehaviour
                 if (hpText != null)
                 {
                     Debug.Log($"hpText 업데이트: {hpText.text}");
-                    if (player.hplv <= 10)
+                    if (player.hplv < 10)
                         hpText.text = $"{level}Lv→{level + 1}Lv\n{requirecoin} Gold";
                     else
+                    {
                         hpText.text = "MAX";
+                        requirecoin = 0;
+                    }
 
                     if (requirecoin > player.coinCount)
                         hpText.color = Color.red;
@@ -273,7 +387,24 @@ public class GameManager : MonoBehaviour
                         hpText.color = Color.white;
                 }
                 break;
-            
+            case 3:
+                if (wcntText != null)
+                {
+                    Debug.Log($"wcntText 업데이트: {wcntText.text}");
+                    if (player.wcntlv < 5)
+                        wcntText.text = $"{level}Lv→{level + 1}Lv\n{requirecoin} Gold";
+                    else
+                    {
+                        wcntText.text = "MAX";
+                        requirecoin = 0;
+                    }
+
+                    if (requirecoin > player.coinCount)
+                        wcntText.color = Color.red;
+                    else
+                        wcntText.color = Color.white;
+                }
+                break;
 
         }
 
@@ -284,6 +415,7 @@ public class GameManager : MonoBehaviour
         UpdateShopUI(player.atklv, 0);
         UpdateShopUI(player.spdlv, 1);
         UpdateShopUI(player.hplv, 2);
+        UpdateShopUI(player.wcntlv, 3);
     }
 
     void Requirecoin(int lv)
