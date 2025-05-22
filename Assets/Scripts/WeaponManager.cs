@@ -10,16 +10,19 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private int weaponcount = 1;
 
     private List<GameObject> weapons = new List<GameObject>();
+    private Weapon weapon;
 
     void Start()
     {
         UpdateWeaponLayout();
+        weapon = FindObjectOfType<Weapon>();
     }
 
     public void IncreaseWeapon()
     {
         weaponcount++;
         UpdateWeaponLayout();
+        SetAllWeaponAttackPower(weapon.attackPower);
     }
 
     void UpdateWeaponLayout()
@@ -50,6 +53,18 @@ public class WeaponManager : MonoBehaviour
             ) * radius;
 
             weapons[i].transform.localPosition = pos;
+        }
+    }
+
+    public void SetAllWeaponAttackPower(float newPower)
+    {
+        foreach (GameObject weaponObj in weapons)
+        {
+            Weapon weapon = weaponObj.GetComponent<Weapon>();
+            if (weapon != null)
+            {
+                weapon.attackPower = newPower;
+            }
         }
     }
 }

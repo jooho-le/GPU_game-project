@@ -4992,6 +4992,8 @@ MonoBehaviour:
   - {fileID: 3601514721111054088, guid: cc2011774c19ff1438ce397ae30a11a9, type: 3}
   - {fileID: 838423781024312150, guid: 34ee260dbafbc4b49b401cd64ab2bd47, type: 3}
   spawnInterval: 10
+  monstersindex: 0
+  monstercount: 5
 --- !u!4 &1906900157
 Transform:
   m_ObjectHideFlags: 0

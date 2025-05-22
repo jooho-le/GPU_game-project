@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] public float maxhp = 50f;
     [SerializeField] public float hp = 50f;
     [SerializeField] public float regenhp = 0f;
+    [SerializeField] public float atkpower = 50f;
 
     public int atklv = 0;
     public int hplv = 0;
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
     public int wcntlv = 0;
 
     public int coinCount = 0; // 💰 코인 개수
-    private int getCoinCount = 0;
+    //private int getCoinCount = 0;
 
 
     Rigidbody2D rigid;

@@ -121,18 +121,20 @@ public class GameManager : MonoBehaviour
                     player.atklv++;
                     player.coinCount -= requirecoin;
                     player.UpdateCoinUI();
-                    weapon.attackPower = weapon.attackPower + 5;
+                    player.atkpower += 5;
                     if (player.atklv == 6)
                     {
-                        weapon.attackPower -= 5;
-                        weapon.attackPower *= 1.5f;
+                        player.atkpower -= 5;
+                        player.atkpower *= 1.5f;
                     }
 
                     if (player.atklv == 10)
-                    { 
-                        weapon.attackPower -= 5;
-                        weapon.attackPower *= 2.0f;
+                    {
+                        player.atkpower -= 5;
+                        player.atkpower *= 2.0f;
                     }
+                    weapon.attackPower = player.atkpower;
+                    wmanage.SetAllWeaponAttackPower(weapon.attackPower);
                     Debug.Log($"공격력 증가! 현재 공격력: {weapon.attackPower}");  // ✅ 디버그 로그 추가
                 }
                 break;
@@ -201,7 +203,7 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case 1:
-                        requirecoin = 150;
+                        requirecoin = 200;
                         break;
 
                     case 2:
@@ -209,11 +211,11 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case 3:
-                        requirecoin = 900;
+                        requirecoin = 800;
                         break;
 
                     case 4:
-                        requirecoin = 2000;
+                        requirecoin = 1000;
                         break;
 
                 }
@@ -294,9 +296,9 @@ public class GameManager : MonoBehaviour
                 break;
             case 1:
                 if (player.spdlv <= 5)
-                    requirecoin = 5;
+                    requirecoin = 15;
                 if (player.spdlv > 5)
-                    requirecoin = 10;
+                    requirecoin = 30;
                 break;
         }
 
@@ -309,7 +311,7 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case 1:
-                    requirecoin = 150;
+                    requirecoin = 200;
                     break;
 
                 case 2:
@@ -317,11 +319,11 @@ public class GameManager : MonoBehaviour
                     break;
                 
                 case 3:
-                    requirecoin = 900;
+                    requirecoin = 800;
                     break;
 
                 case 4:
-                    requirecoin = 2000;
+                    requirecoin = 1000;
                     break;
 
             }
@@ -424,43 +426,43 @@ public class GameManager : MonoBehaviour
         switch (lv)
         {
             case 0:
-                requirecoin = 1;
-                break;
-
-            case 1:
                 requirecoin = 3;
                 break;
 
-            case 2:
-                requirecoin = 5;
-                break;
-
-            case 3:
-                requirecoin = 7;
-                break;
-
-            case 4:
+            case 1:
                 requirecoin = 9;
                 break;
 
-            case 5:
-                requirecoin = 20;
-                break;
-
-            case 6:
+            case 2:
                 requirecoin = 15;
                 break;
 
+            case 3:
+                requirecoin = 21;
+                break;
+
+            case 4:
+                requirecoin = 27;
+                break;
+
+            case 5:
+                requirecoin = 60;
+                break;
+
+            case 6:
+                requirecoin = 45;
+                break;
+
             case 7:
-                requirecoin = 22;
+                requirecoin = 66;
                 break;
 
             case 8:
-                requirecoin = 31;
+                requirecoin = 93;
                 break;
 
             case 9:
-                requirecoin = 50;
+                requirecoin = 150;
                 break;
         }
     }
